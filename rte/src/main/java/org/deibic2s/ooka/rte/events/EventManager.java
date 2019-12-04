@@ -42,13 +42,10 @@ public class EventManager {
             try {
                 om.getValue().invoke(om.getKey(), message);
             } catch (IllegalAccessException e) {
-                System.out.println("catchiae");
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
-                System.out.println("catchite");
                 e.printStackTrace();
             } catch(IllegalArgumentException e) {
-                System.out.println("catchIAE");
                 e.printStackTrace();
             }
         }

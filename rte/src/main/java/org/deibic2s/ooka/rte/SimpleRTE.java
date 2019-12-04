@@ -29,7 +29,6 @@ public class SimpleRTE {
     public SimpleRTE(){
         dataComponentDAO = new JDBCComponentDAO();
         isRTERunning = new ReadOnlyBooleanWrapper(false);
-        System.out.println("lalala");
         nextID = 0;
         componentLoader = new ComponentLoader();
         availableComponents = FXCollections.observableArrayList();

@@ -180,7 +180,6 @@ public class Component {
                 e.printStackTrace();
             }
         }
-        System.out.println(componentLoggerFactoryField);
         if(componentLoggerFactoryField != null && instance != null && l != null ){
             try {
                 componentLoggerFactoryField.set(instance, il);
