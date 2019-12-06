@@ -26,6 +26,7 @@ public class SimpleRTE {
 
     private ILogger logger;
 
+
     public SimpleRTE(){
         dataComponentDAO = new JDBCComponentDAO();
         isRTERunning = new ReadOnlyBooleanWrapper(false);
@@ -62,12 +63,12 @@ public class SimpleRTE {
 
         Command deployCommand = new DeployCommand(new Component(pathToComponent, "component"), componentLoader, nextID++);
         CommandResult cr = deployCommand.execute();
+
         availableComponents.add(cr.getComponent());
         if(cr.getCommandCode() == SUCCESS) {
             dataComponentDAO.createDataComponent(cr.getComponent().getDataComponent());
         }
 
-        logResult(cr, "Deploy");
         return cr;
     }
 
@@ -174,7 +175,6 @@ public class SimpleRTE {
                 nextID = c.getId()+1;
             }
         }
-
     }
 
     public ObservableList<Component> getReadonlyComponentList(){
