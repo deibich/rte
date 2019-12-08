@@ -57,7 +57,10 @@ public class Component {
         restoreState = INITIALIZED;
         id = -1;
         componentState = new ReadOnlyObjectWrapper<>(INITIALIZED);
+    }
 
+    void rename(String newName) {
+        this.name = newName;
     }
 
     public ComponentState getRestoreState() {
@@ -301,13 +304,16 @@ public class Component {
             componentState.set(ComponentState.STOPPING);
             try {
                 stopMethod.invoke(instance);
+                componentThread.interrupt();
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
             try {
-                componentThread.join();
+                componentThread.join(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                componentThread.stop();
+
             }
             componentState.set(ComponentState.DEPLOYED);
         }

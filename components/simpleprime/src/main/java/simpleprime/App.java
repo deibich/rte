@@ -31,7 +31,9 @@ public class App
         if(myEvent != null)
             myEvent.fire("State", "Started");
         
-        dummePrim();
+        int p = dummePrim();
+        if(logger != null)
+            logger.info(""+p);
     }
 
     @Observes(
@@ -74,8 +76,6 @@ public class App
             }
             if(prime) {
                 highest = p;
-                if(logger != null)
-                    logger.info(""+p);
             }
             prime = true;
             p+=2;
