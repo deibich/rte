@@ -8,6 +8,7 @@ import org.deibic2s.ooka.rte.logging.RTELogCreator;
 
 public class EventManager {
     private static EventManager myInstance;
+    
     Map<String, List<SimpleEntry<Object, Method>>> registeredListeners;
 
     private EventManager(){

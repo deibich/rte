@@ -16,9 +16,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
+import java.util.Map;
+import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
+
+import java.util.jar.Manifest;
+
 import org.deibic2s.ooka.events.Event;
 import org.deibic2s.ooka.events.InjectEvent;
 import org.deibic2s.ooka.events.Observes;
@@ -34,6 +39,7 @@ public class ComponentLoader {
             if(Pattern.matches(".*\\.jar$", component.getPathToComponent())){
                 ClassLoader cl = getClassLoader(component.getPathToComponent());
                 component.setClassLoader(cl);
+                component.rename(filePath.getName().substring(0, filePath.getName().length()-4));
             }else {
                 System.out.println("File does not match");
             }
@@ -169,13 +175,34 @@ public class ComponentLoader {
         }
     }
 
+    /*
+    void getManifestInfos(Component component) {
+        JarFile jarFile = null;
+        try{
+            jarFile = new JarFile(component.getPathToComponent());
+
+            Manifest manifest = jarFile.getManifest();
+            
+            if(manifest == null)
+                return;
+
+            Map<String, Attributes> entries = manifest.getEntries();
+            Attributes a = manifest.getMainAttributes();
+
+
+        } catch(Exception e) {
+
+        }
+    }
+    */
+
     private ClassLoader getClassLoader(String pathToJAR){
         URLClassLoader cl = null;
         try {
 
             URL[] urls = {new URL("jar:file:" + pathToJAR + "!/")};
             cl = URLClassLoader.newInstance(urls);
-
+            
         } catch (MalformedURLException e) {
             // TODO: Error Handling
             e.printStackTrace();

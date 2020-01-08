@@ -313,7 +313,6 @@ public class Component {
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 componentThread.stop();
-
             }
             componentState.set(ComponentState.DEPLOYED);
         }
