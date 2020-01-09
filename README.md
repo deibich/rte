@@ -7,3 +7,5 @@
 ## TODO
 - Tests
 - More Components
+- Detach Command Execution from UI
+- Refactor diagrams 
