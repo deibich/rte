@@ -1,4 +1,4 @@
-package org.deibic2s.ooka.logging;
+package org.deibic2s.ooka.componentmodel.logging;
 
 
 import java.lang.annotation.*;

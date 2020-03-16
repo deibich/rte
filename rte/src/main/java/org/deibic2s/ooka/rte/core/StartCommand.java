@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 
-import org.deibic2s.ooka.logging.ILogger;
+import org.deibic2s.ooka.componentmodel.logging.ILogger;
 import org.deibic2s.ooka.rte.utils.CommandResult;
 import org.deibic2s.ooka.rte.utils.ComponentState;
 import org.deibic2s.ooka.rte.events.ConcreteEvent;

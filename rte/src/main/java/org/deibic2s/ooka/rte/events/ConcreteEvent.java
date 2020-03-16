@@ -1,5 +1,5 @@
 package org.deibic2s.ooka.rte.events;
-import org.deibic2s.ooka.events.Event;
+import org.deibic2s.ooka.componentmodel.events.Event;
 
 public class ConcreteEvent<E> implements Event<E> {
     private EventManager eventManager;

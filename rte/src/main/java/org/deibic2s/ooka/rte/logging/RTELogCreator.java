@@ -2,8 +2,8 @@ package org.deibic2s.ooka.rte.logging;
 
 import java.util.HashMap;
 
-import org.deibic2s.ooka.logging.ILoggerFactory;
-import org.deibic2s.ooka.logging.ILogger;
+import org.deibic2s.ooka.componentmodel.logging.ILoggerFactory;
+import org.deibic2s.ooka.componentmodel.logging.ILogger;
 public class RTELogCreator implements ILoggerFactory {
 
     private static HashMap<String, ILogger> availableLoggers;

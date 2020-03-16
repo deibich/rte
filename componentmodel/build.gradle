@@ -29,9 +29,9 @@ publishing {
     }   
     publications {
         gpr(MavenPublication) {
-            groupId = 'org.deibic2s.ooka'
-            artifactId = 'componentmodel'
-            version = '1.0'
+            groupId = 'org.deibic2s.ooka.componentmodel'
+            artifactId = 'annotations'
+            version = '1.1'
             from(components.java)
         }
     }

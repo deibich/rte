@@ -4,13 +4,13 @@
 package simpleprime;
 
 import org.deibic2s.ooka.componentmodel.annotations.*;
-import org.deibic2s.ooka.events.Event;
-import org.deibic2s.ooka.logging.ILoggerFactory;
-import org.deibic2s.ooka.logging.InjectLogger;
-import org.deibic2s.ooka.logging.InjectLoggerFactory;
-import org.deibic2s.ooka.logging.ILogger;
-import org.deibic2s.ooka.events.InjectEvent;
-import org.deibic2s.ooka.events.Observes;
+import org.deibic2s.ooka.componentmodel.events.Event;
+import org.deibic2s.ooka.componentmodel.logging.ILoggerFactory;
+import org.deibic2s.ooka.componentmodel.logging.InjectLogger;
+import org.deibic2s.ooka.componentmodel.logging.InjectLoggerFactory;
+import org.deibic2s.ooka.componentmodel.logging.ILogger;
+import org.deibic2s.ooka.componentmodel.events.InjectEvent;
+import org.deibic2s.ooka.componentmodel.events.Observes;
 
 public class App 
 {

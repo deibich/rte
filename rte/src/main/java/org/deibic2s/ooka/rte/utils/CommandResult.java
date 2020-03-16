@@ -1,6 +1,6 @@
 package org.deibic2s.ooka.rte.utils;
 
-import org.deibic2s.ooka.logging.ILogger;
+import org.deibic2s.ooka.componentmodel.logging.ILogger;
 import org.deibic2s.ooka.rte.core.Component;
 
 public class CommandResult {

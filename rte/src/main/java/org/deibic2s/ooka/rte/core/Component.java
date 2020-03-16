@@ -2,7 +2,7 @@ package org.deibic2s.ooka.rte.core;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import org.deibic2s.ooka.logging.ILogger;
+import org.deibic2s.ooka.componentmodel.logging.ILogger;
 import org.deibic2s.ooka.rte.persistence.ComponentDTO;
 import org.deibic2s.ooka.rte.utils.ComponentState;
 import java.lang.reflect.Type;
@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.deibic2s.ooka.events.Event;
-import org.deibic2s.ooka.logging.ILoggerFactory;
+import org.deibic2s.ooka.componentmodel.events.Event;
+import org.deibic2s.ooka.componentmodel.logging.ILoggerFactory;
 
 import static org.deibic2s.ooka.rte.utils.ComponentState.*;
 

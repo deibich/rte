@@ -1,6 +1,6 @@
 package org.deibic2s.ooka.rte.logging;
 
-import org.deibic2s.ooka.logging.ILogger;
+import org.deibic2s.ooka.componentmodel.logging.ILogger;
 
 public class RteLogger implements ILogger {
         private final Log log;
