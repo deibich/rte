@@ -51,8 +51,9 @@ public class DeployCommand extends Command {
         c.addCommand(new RemoveCommand(c));
 
         if(code == CommandResult.CODE.SUCCESS) {
-            c.addCommand(new StartCommand(c, RTELogCreator.getInstance().getLogger("component")));
+            c.addCommand(new StartCommand(c, cl, RTELogCreator.getInstance().getLogger("component")));
             c.addCommand(new StopCommand(c));
+            c.addCommand(new InjectFieldsCommand(c, cl));
         }
 
         return new CommandResult(code, message, c, null);

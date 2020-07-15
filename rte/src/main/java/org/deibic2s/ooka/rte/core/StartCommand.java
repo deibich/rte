@@ -20,9 +20,12 @@ public class StartCommand extends Command{
 
    private Component component;
     private ILogger logger;
-    public StartCommand(Component component, ILogger l){
+
+    private ComponentLoader cl;
+    public StartCommand(Component component, ComponentLoader cl, ILogger l){
         this.component = component;
         this.logger = l;
+        this.cl = cl;
         
     }
 
@@ -33,7 +36,10 @@ public class StartCommand extends Command{
 
         component.prepareStart();
         component.setLogger(logger, RTELogCreator.getInstance());
-
+        if(component.getEventListenerMethods() == null || component.getEventListenerMethods().isEmpty())
+            cl.getEventListeners(component);
+        if(component.getEventfields() == null || component.getEventFieldSize() == 0)
+            cl.getInjectableEventFields(component);
         // Create Event for each type in componentEventFields
         // Add them to the instance
         for (AbstractMap.SimpleEntry<Type, Field> se : component.getEventfields()){

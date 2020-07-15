@@ -16,12 +16,16 @@ public class App
 {
     private boolean stopMe;
 
+    @InProductionScope
+    @UnderInspectionScope
     @InjectLogger
     private ILogger logger;
     
+    @UnderTestScope
     @InjectEvent
     private Event<String> myEvent;
 
+    @InProductionScope
     @InjectLoggerFactory
     private ILoggerFactory loggerFactory;
 

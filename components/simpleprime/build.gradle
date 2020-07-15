@@ -36,7 +36,7 @@ repositories {
 
 dependencies {
     compileOnly group: 'org.deibic2s.ooka.componentmodel', name: 'logging', version: '1.1'
-    compileOnly group: 'org.deibic2s.ooka.componentmodel', name: 'annotations', version: '1.1'
+    compileOnly group: 'org.deibic2s.ooka.componentmodel', name: 'annotations', version: '1.3'
     compileOnly group: 'org.deibic2s.ooka.componentmodel', name: 'events', version: '1.1'
 }
 

@@ -27,7 +27,7 @@ public class SimpleRTE {
     private ReadOnlyBooleanWrapper isRTERunning;
     private Integer nextID;
     private JDBCComponentDAO dataComponentDAO;
-
+    private Scope currentScope;
     private ILogger logger;
 
 
@@ -36,8 +36,9 @@ public class SimpleRTE {
         dataComponentDAO = new JDBCComponentDAO();
         isRTERunning = new ReadOnlyBooleanWrapper(false);
         nextID = 0;
-        componentLoader = new ComponentLoader();
+        componentLoader = new ComponentLoader(this);
         availableComponents = FXCollections.observableArrayList();
+        currentScope = Scope.In_Production;
     }
 
     public boolean getIsRTERunning(){
@@ -142,7 +143,7 @@ public class SimpleRTE {
         for(Component c: availableComponents){
             if(c.getShouldRestore()){
                 dataComponentDAO.removeDataComponent(c.getDataComponent());
-                RestoreCommand rc = new RestoreCommand(c);
+                RestoreCommand rc = new RestoreCommand(c, componentLoader);
                 CommandResult cr = rc.execute();
                 logResult(cr, "Restore");
                 if(cr.getComponent().getComponentState() == ComponentState.REMOVED){
@@ -189,4 +190,22 @@ public class SimpleRTE {
         return FXCollections.unmodifiableObservableList(availableComponents);
     }
 
+    public Scope getScope(){
+        return currentScope;
+    }
+
+    public void setScope(Scope s) {
+        Scope lastScope = currentScope;
+        currentScope = s;
+        if(lastScope != currentScope)
+        {   
+            if(!availableComponents.isEmpty()){
+                for (Component component : availableComponents) {
+                    if(component.getComponentState() == ComponentState.DEPLOYED || component.getComponentState() == ComponentState.STARTED){
+                        doCommand(component.getId(), InjectFieldsCommand.class);
+                    }
+                }
+            }
+        }
+    }
 }

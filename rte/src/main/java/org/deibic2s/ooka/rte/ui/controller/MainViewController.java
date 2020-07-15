@@ -21,7 +21,7 @@ import org.deibic2s.ooka.rte.ui.views.LogView;
 import org.deibic2s.ooka.rte.utils.ComponentState;
 import org.deibic2s.ooka.rte.logging.RTELogCreator;
 import org.deibic2s.ooka.rte.logging.RteLogger;
-
+import org.deibic2s.ooka.rte.core.Scope;
 import java.io.File;
 
 public class MainViewController {
@@ -60,6 +60,9 @@ public class MainViewController {
 
     @FXML
     Button btnSelectComponent;
+
+    @FXML
+    ComboBox<Scope> comboBoxScope;
 
     private Stage myStage;
     private SimpleRTE myRTE;
@@ -119,10 +122,17 @@ public class MainViewController {
         tabRTELog.getTabPane().getTabs().add(eventstLogTab);
         
         generateLogTab(RTELogCreator.getInstance().getRTELogger("events"), eventstLogTab);
+
+        comboBoxScope.getItems().addAll(Scope.In_Maintenance, Scope.In_Production, Scope.Under_Inspection, Scope.Under_Test);
+        comboBoxScope.setValue(myRTE.getScope());
     }
 
     public void onStartRTEPressed(ActionEvent actionEvent) {
         myRTE.startRTE();
+    }
+
+    public void onScopeChanged(ActionEvent actionEvent) {
+        myRTE.setScope(comboBoxScope.getValue());
     }
 
     public void onStopRTEPressed(ActionEvent actionEvent) {

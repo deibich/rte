@@ -3,6 +3,7 @@ package org.deibic2s.ooka.rte.core;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import org.deibic2s.ooka.componentmodel.logging.ILogger;
+import org.deibic2s.ooka.rte.events.EventManager;
 import org.deibic2s.ooka.rte.persistence.ComponentDTO;
 import org.deibic2s.ooka.rte.utils.ComponentState;
 import java.lang.reflect.Type;
@@ -77,6 +78,12 @@ public class Component {
         return componentEventFields;
     }
 
+    int getEventFieldSize() {
+        return componentEventFields.size();
+    }
+    
+    
+
     
     Map<String, List<SimpleEntry<Type, Method>>> getEventListenerMethods(){
         
@@ -84,6 +91,8 @@ public class Component {
     }
 
     void addEventListenerMethod(String topic, Type t, Method m){
+        if(eventListeners == null)
+            eventListeners = new HashMap<>();
         List<SimpleEntry<Type, Method>> listenerForTopic =  eventListeners.get(topic);
         if(listenerForTopic == null) {
             listenerForTopic = new ArrayList<>();
@@ -174,6 +183,48 @@ public class Component {
             }
         }
     }
+
+    void removeEvents(){
+        for (String topic : eventListeners.keySet()) {
+            EventManager.Instance().removeListenerForInstance(topic, getComponentInstance());
+        }
+        eventListeners = new HashMap<>();
+
+        if(getComponentInstance() != null){
+            for (SimpleEntry<Type,Field> simpleEntry : componentEventFields) {
+                try {
+                    simpleEntry.getValue().set(getComponentInstance(), null);
+                }catch(Exception e){
+
+                }
+            }
+        }
+        
+        this.componentEventFields = new ArrayList<>(); 
+    }
+
+    void removeLogger() {
+        
+        if(getComponentInstance() != null) {
+            try {
+                componentLoggerField.set(getComponentInstance(), null);
+            }catch(Exception e){
+                
+            }
+        }
+    }
+
+    void removeLoggerFactory(){
+        if(getComponentInstance() != null) {
+            try {
+            componentLoggerFactoryField.set(getComponentInstance(), null);
+            }catch(Exception e){
+
+            }
+        }
+        
+    }
+
 
     void setLogger(ILogger l, ILoggerFactory il) {
         if (componentLoggerField != null && instance != null && l != null) {

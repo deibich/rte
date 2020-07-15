@@ -7,8 +7,11 @@ import org.deibic2s.ooka.rte.utils.ComponentState;
 public class RestoreCommand extends Command {
 
     private Component c;
-    public RestoreCommand(Component c){
+
+    ComponentLoader cl;
+    public RestoreCommand(Component c, ComponentLoader cl){
         this.c = c;
+        this.cl = cl;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class RestoreCommand extends Command {
                 break;
             case STARTED:
                 // Start the component
-                StartCommand sc = new StartCommand(c,RTELogCreator.getInstance().getLogger("component"));
+                StartCommand sc = new StartCommand(c, cl, RTELogCreator.getInstance().getLogger("component"));
                 cr = sc.execute();
                 if(cr.getCommandCode() != CommandResult.CODE.SUCCESS){
                     message += ComponentState.ERROR.toString();
